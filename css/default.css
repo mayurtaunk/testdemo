@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:600,400);
+@import url(https://fonts.googleapis.com/css?family=Raleway:100);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:100);
+/*.backimage
+{
+	background-image: url("../img/backimg.jpg");
+	filter: blur(5px);
+	background-repeat: repeat;
+}*/
+.dashboardtext
+{
+	/*font-family: 'Raleway', sans-serif;
+	font-weight: 100;
+	font-size: 50px;
+	color: #00ffbf;*/
+	font-family: 'Roboto Slab', serif;
+	font-weight: 100;
+	font-size: 40px;
+	color: #191966;
+}
+body
+{
+	background-image: url("bg5.jpg");
+  	background-size: cover;
+  	margin: 20px;
+}
+.sbs
+{
+	height: 50px;
+}
+.imagePreview 
+{
+	width: 180px;
+	height: 180px;
+	background-position: center center;
+	background-size: cover;
+	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+	display: inline-block;
+}
+.top-margin
+{
+	margin-top: 15%;
+}
+.viewdata
+{
+	text-align: right;
+}
+.pic_caption
+{
+	text-align: center;
+	font-family: 'Dosis', sans-serif;
+	font-weight: 600;
+}
