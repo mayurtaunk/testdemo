@@ -135,9 +135,16 @@ class Customer extends CI_Controller
 			$this->form_validation->set_rules('width', 'Width', 'required|numeric');
 			$this->form_validation->set_rules('height', 'Height', 'required|numeric');
 			$this->form_validation->set_rules('weight', 'Weight', 'required|numeric');
+			$ext=pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			if (empty($_FILES['userfile']['name']))
+			{
+    			$this->form_validation->set_rules('userfile', 'Image', 'required');
+			}
+			
 			if ($this->form_validation->run() == FALSE)
 			{
-				$data=array('panel_title'=> 'New Consignment',
+				$data=array(
+						'panel_title'=> 'New Consignment',
 						'page' => 'newconsignment/newcon3',
 						);
 				$this->load->view('customer',$data);
@@ -148,6 +155,19 @@ class Customer extends CI_Controller
 				$this->session->set_userdata('height',$this->input->post('height'));
 				$this->session->set_userdata('weight',$this->input->post('weight'));
 				$this->session->set_userdata('image',$this->input->post('image'));
+				$filename="Img_".random_string('alnum', 16).'.'.pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+				$config['upload_path']   = './uploads/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['file_name']     = $filename;
+				$this->load->library('upload', $config);
+				if (!$this->upload->do_upload())
+				{
+					$msg=$this->upload->display_errors()."<br>You can only upload ".$config['allowed_types'];
+				}
+				else
+				{
+					$this->session->set_userdata('location','uploads/'.$filename);
+				}
 				$data=array('panel_title'=> 'New Consignment',
 							'page' => 'newconsignment/newcon4');
 				$this->load->view('customer',$data);
