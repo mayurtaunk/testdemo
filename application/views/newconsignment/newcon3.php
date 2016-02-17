@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\4'); ?>" method="post">
+		<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\4'); ?>" method="POST" enctype="multipart/form-data"
+>
 			<div class="row">
 				<div class="col-md-12">
 					<h4 style="margin:20px;"><span class="label label-default">Step 3</span><b> Can I See The Consignment </b></h4>
@@ -11,9 +12,10 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<div href="#" class="thumbnail">
-  							<img src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
+  							<img id="imppr" src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
   						</div>
-						<input id="uploadFile" type="file" name="image" value="Choose Image" class="img" />
+						<input id="uploadFile" type="file" name="userfile" value="Choose Image" class="img" />
+  						<p class="help-block"><?php echo form_error('userfile'); ?></p>
 					</div>
 				</div>
 				<div class="col-md-7 col-md-offset-1" style="margin-top:10px;">
