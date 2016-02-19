@@ -154,7 +154,6 @@ class Customer extends CI_Controller
 				$this->session->set_userdata('width',$this->input->post('width'));
 				$this->session->set_userdata('height',$this->input->post('height'));
 				$this->session->set_userdata('weight',$this->input->post('weight'));
-				$this->session->set_userdata('image',$this->input->post('image'));
 				$filename="Img_".random_string('alnum', 16).'.'.pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
 				$config['upload_path']   = './uploads/';
 				$config['allowed_types'] = 'gif|jpg|png';

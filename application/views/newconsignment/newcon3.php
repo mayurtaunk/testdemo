@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\4'); ?>" method="POST" enctype="multipart/form-data"
->
+		<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\4'); ?>" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-md-12">
 					<h4 style="margin:20px;"><span class="label label-default">Step 3</span><b> Can I See The Consignment </b></h4>

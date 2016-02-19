@@ -68,19 +68,61 @@ class Auth extends CI_Controller
 			}
 			else
 			{
-				$this->session->set_userdata('question',$this->input->post('question'));
-				$this->session->set_userdata('answer',$this->input->post('answer'));
-				$this->load->model('auth_model');
-				if($this->auth_model->insert() == 1)
+				if($this->session->userdata('utype')==1)
 				{
-					$this->load->view('login');
+					$this->session->set_userdata('question',$this->input->post('question'));
+					$this->session->set_userdata('answer',$this->input->post('answer'));
+					$this->load->view('signup/signup5');
 				}
 				else
 				{
-					echo "<div class='alert alert-danger' role='alert'>Registration Failed</div>";
+					$this->session->set_userdata('question',$this->input->post('question'));
+					$this->session->set_userdata('answer',$this->input->post('answer'));
+					$this->load->model('auth_model');
+					if($this->auth_model->insert() == 1)
+					{
+						$this->load->view('login');
+					}
+					else
+					{
+						echo "<div class='alert alert-danger' role='alert'>Registration Failed</div>";
+					}
 				}
 			}
+
 		}
+		else if($pno==6)
+		{
+			$ext=pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			if (empty($_FILES['userfile']['name']))
+			{
+    			$this->form_validation->set_rules('userfile', 'Image', 'required');
+			}
+			$filename="Img_".random_string('alnum', 16).'.'.pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			$config['upload_path']   = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['file_name']     = $filename;
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload())
+			{
+				$msg=$this->upload->display_errors()."<br>You can only upload ".$config['allowed_types'];
+			}
+			else
+			{
+				$this->session->set_userdata('locationproof','uploads/'.$filename);
+			}
+			$this->load->model('auth_model');
+			if($this->auth_model->insert() == 1)
+			{
+				$this->load->view('login');
+			}
+			else
+			{
+				echo "<div class='alert alert-danger' role='alert'>Registration Failed</div>";
+			}
+			
+		}
+		
 	}
 	/*Sign Up*/
 	/*Validation Of Login*/

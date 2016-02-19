@@ -43,7 +43,7 @@ class Customer_model extends CI_Model
                     'description' => $this->session->userdata('description'),
                     'expected_delivery' => $this->session->userdata('expdate'),
                     'title' => $this->session->userdata('title'),
-                    'image' => $this->session->userdata('image'),
+                    'image' => $this->session->userdata('location'),
                     'tquser_id' => $this->session->userdata('userid'),
                     'status' => '0',
                     'carriers_id' => '0');

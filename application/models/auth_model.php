@@ -30,6 +30,15 @@ class Auth_model extends CI_Model
                         'type'=>$this->session->userdata('utype'),
                         'tquser_id'=>$id);
     	$this->db->insert('users',$datauser);
+        
+        if($this->session->userdata("utype")=="1")
+        {
+            $datauser=array('id_proof'=>$this->session->userdata('locationproof'),
+                        'status'=>0,
+                        'tquser_id'=>$id
+                        );
+            $this->db->insert('carriers',$datauser);
+        }
         $this->db->trans_complete();
         if ($this->db->trans_status() === FALSE)
         {
@@ -74,4 +83,5 @@ class Auth_model extends CI_Model
         }
     }
     /*To verify the user*/
+
 }
