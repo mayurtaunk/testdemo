@@ -44,6 +44,39 @@ class Customer extends CI_Controller
 			$this->load->view('customer',$data);
 	}
 	/*Default Page*/
+
+	/*Get Distance*/
+		function getDistance($addressFrom, $addressTo, $unit)
+		{
+		    //Change address format
+		    $formattedAddrFrom = str_replace(' ','+',$addressFrom);
+		    $formattedAddrTo = str_replace(' ','+',$addressTo);
+		    //Send request and receive json data
+		    $geocodeFrom = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$formattedAddrFrom.'&sensor=false');
+		    $outputFrom = json_decode($geocodeFrom);
+		    $geocodeTo = file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$formattedAddrTo.'&sensor=false');
+		    $outputTo = json_decode($geocodeTo);
+		    //Get latitude and longitude from geo data
+		    $latitudeFrom = $outputFrom->results[0]->geometry->location->lat;
+		    $longitudeFrom = $outputFrom->results[0]->geometry->location->lng;
+		    $latitudeTo = $outputTo->results[0]->geometry->location->lat;
+		    $longitudeTo = $outputTo->results[0]->geometry->location->lng;
+		    //Calculate distance from latitude and longitude
+		    $theta = $longitudeFrom - $longitudeTo;
+		    $dist = sin(deg2rad($latitudeFrom)) * sin(deg2rad($latitudeTo)) +  cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) * cos(deg2rad($theta));
+		    $dist = acos($dist);
+		    $dist = rad2deg($dist);
+		    $miles = $dist * 60 * 1.1515;
+		    $unit = strtoupper($unit);
+		    if ($unit == "K") {
+		        return ($miles * 1.609344).' km';
+		    } else if ($unit == "N") {
+		        return ($miles * 0.8684).' nm';
+		    } else {
+		        return $miles.' mi';
+		    }
+		}
+	/*End Get Distance*/
 	/*Dasboard Page2*/
 	public function details($id,$cid)
 	{
@@ -98,11 +131,40 @@ class Customer extends CI_Controller
 			}
 			else
 			{
+				$this->load->library('googlemaps');
+				$config=array('zoom'=>'auto',
+							  'directionsStart'=>$this->input->post('scity'),
+							  'directionsEnd' =>$this->input->post('dcity'),
+							  'directionsMode'=>"DRIVING",
+							  'directions'=>TRUE,
+							  'kmlLayerPreserveViewport'=>TRUE,
+							  'map_height'=>"300px");
+				$marker = array();
+				$marker['position'] = $this->input->post('scity');
+				$marker['infowindow_content'] = "Source";
+				$marker['title']="Source";
+				$this->googlemaps->add_marker($marker);
+
+				$marker['position'] = $this->input->post('dcity');
+				$marker['infowindow_content'] = "Destination";
+				$marker['title']="Destination";
+
+				$this->googlemaps->add_marker($marker);
+				$polyline = array();
+				$polyline['points'] = array($this->input->post('scity'),$this->input->post('dcity'));
+				$polyline['strokeColor'] = "#FFFFFF";
+				$polyline['strokeOpacity']="0.5";
+				$polyline['strokeWeight'] = "5";
+
+				$this->googlemaps->add_polyline($polyline);
+				$this->googlemaps->initialize($config);
 				$this->session->set_userdata('scity',$this->input->post('scity'));
 				$this->session->set_userdata('dcity',$this->input->post('dcity'));
 				$data=array('panel_title'=> 'New Consignment',
 							'page' => 'newconsignment/newcon2',
-							);
+							'ismap'=>1,
+							'dist'=>ceil($this->getDistance($this->input->post('scity'),$this->input->post('dcity'),"k")). " Kilometers",
+							'map'=>$this->googlemaps->create_map());
 				$this->load->view('customer',$data);
 			}
 		}

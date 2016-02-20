@@ -3,7 +3,14 @@
 <head>
 	<link href="<?php echo base_url("css/bootstrap.min.css")?>" rel="stylesheet">
 	<link href="<?php echo base_url("css/default.css")?>" rel="stylesheet">
+	<link href="<?php echo base_url("css/city-autocomplete.css")?>" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<?php 
+	if(isset($map['js']))
+	{
+		 echo $map['js']; 
+	}
+	?>
 </head>
 <body>
 <!-- customer Form Start -->
@@ -24,11 +31,14 @@
 				</div>
 			</nav>
 		</div>
+		
 	</div>
 </div>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3">
+			<div class="row">
+			<div class="col-md-12">
 			<div class="panel-group">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -49,6 +59,26 @@
 					</div>
 				</div>
 			</div>
+			</div>
+			</div>
+			<?php if(isset($ismap)){ ?>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default backimage">
+						<div class="panel-heading">
+						<!-- <M>Varaible to assign new title on page load -->
+							<strong>Map </strong>
+						</div>
+						<div class="panel-body">
+						<div style="border: solid; border-color: rgba(30,20,40,0.5);">
+							<label>Distance : <?php echo $dist ?></label>
+							<?php echo $map['html']; ?>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
 		</div>
 		<div class="col-md-9">
 				<div class="panel panel-default backimage">
@@ -57,6 +87,7 @@
 						<strong> <?php echo $panel_title; ?> </strong>
 					</div>
 					<div class="panel-body">
+
 						<?php
 							if(isset($page))
 							{
@@ -71,6 +102,12 @@
 </div>
 <script src=<?php echo base_url("js/jq.js")?>></script>
 <script src=<?php echo base_url("js/bootstrap.min.js")?>></script>
+<script src=<?php echo base_url("js/jquery.city-autocomplete.js")?>></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+<script>
+$('input#scity').cityAutocomplete();
+$('input#dcity').cityAutocomplete();
+</script>
 <script type="text/javascript">
     var baseurl= <?php echo base_url()?>;
     $(document).ready(function() {

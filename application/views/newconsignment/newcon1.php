@@ -16,7 +16,8 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i>
 							</span>
-							<input class="form-control" type="text" placeholder="Source City" name="scity"> <br>
+						
+							<input id="scity" class="form-control" type="text" autocomplete="off" placeholder="Source City" name="scity" data-country="in"> <br>
 						</div>
 						<p class="help-block"><?php echo form_error('scity'); ?></p>
 					</div>
@@ -25,7 +26,7 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i>
 							</span>
-							<input class="form-control" type="text" placeholder="Destination City" name="dcity"> <br>
+							<input id="dcity" class="form-control" autocomplete="off" type="text" placeholder="Destination City" name="dcity" data-country="in"> <br>
 						</div>
 						<p class="help-block"><?php echo form_error('dcity'); ?></p>
 					</div>
