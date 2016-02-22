@@ -4,7 +4,8 @@
 	<link href="<?php echo base_url("css/bootstrap.min.css")?>" rel="stylesheet">
 	<link href="<?php echo base_url("css/default.css")?>" rel="stylesheet">
 	<link href="<?php echo base_url("css/city-autocomplete.css")?>" rel="stylesheet">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link href="<?php echo base_url("css/breadcrumb.css")?>" rel="stylesheet">
+	<link href="<?php echo base_url("css/jqueryui.css")?>" rel="stylesheet">
 	<?php 
 	if(isset($map['js']))
 	{
@@ -86,7 +87,15 @@
 						<!-- <M>Varaible to assign new title on page load -->
 						<strong> <?php echo $panel_title; ?> </strong>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body"> 
+						<?php if(isset($showbr)){ ?>
+						<ol class="breadcrumb">
+							<li <?php $sno=$this->session->userdata('sno'); echo ($sno==1)?"class='bactive'":"class='binactive'"; ?>>Step 1</li>
+							<li <?php $sno=$this->session->userdata('sno'); echo ($sno==2)?"class='bactive'":"class='binactive'"; ?>>Step 2</li>
+							<li <?php $sno=$this->session->userdata('sno'); echo ($sno==3)?"class='bactive'":"class='binactive'"; ?>>Step 3</li>
+							<li <?php $sno=$this->session->userdata('sno'); echo ($sno==4)?"class='bactive'":"class='binactive'"; ?>>Step 4</li>
+						</ol>
+						<?php }?>
 
 						<?php
 							if(isset($page))
@@ -103,10 +112,11 @@
 <script src=<?php echo base_url("js/jq.js")?>></script>
 <script src=<?php echo base_url("js/bootstrap.min.js")?>></script>
 <script src=<?php echo base_url("js/jquery.city-autocomplete.js")?>></script>
+<script src=<?php echo base_url("js/jqueryui.js")?>></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
 <script>
-$('input#scity').cityAutocomplete();
-$('input#dcity').cityAutocomplete();
+$('#scity').cityAutocomplete();
+$('#dcity').cityAutocomplete();
 </script>
 <script type="text/javascript">
     var baseurl= <?php echo base_url()?>;
@@ -141,7 +151,6 @@ $('input#dcity').cityAutocomplete();
     	});     
     });
 </script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
 	$(function() {
  		$( "#expdate" ).datepicker(
@@ -154,6 +163,7 @@ $('input#dcity').cityAutocomplete();
 		});
 	});
 </script>
+
 
 </body>
 </html> 

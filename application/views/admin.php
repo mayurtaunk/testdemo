@@ -132,6 +132,31 @@
     			}
     		});
     	});
+		$(document).delegate("#sbtn","click",function(e){
+			 jQuery.ajax({
+    			url : baseurl + "index.php/admin/getCustomer",
+    			type : "POST",
+    			dataType : "text",
+    			data : {name:$("#scust").val()},
+    			async : false,
+    			success:function(data){
+    				$("#dCustomerData").html(data);
+    			}
+    		});
+		});
+		$(document).delegate("#sbtncl","click",function(e){
+			 jQuery.ajax({
+    			url : baseurl + "index.php/admin/getCarrier",
+    			type : "POST",
+    			dataType : "text",
+    			data : {name:$("#scar").val()},
+    			async : false,
+    			success:function(data){
+    				$("#dcarrierdata").html(data);
+    				console.log(data);
+    			}
+    		});
+		});
     });
 </script>
 </body>

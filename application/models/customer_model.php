@@ -9,7 +9,7 @@ class Customer_model extends CI_Model
     function getcon()
     {
     	$id=$this->session->userdata('userid');
-    	$query = $this->db->query("select s.id,s.title,s.description,s.date_time,s.expected_delivery,t.name,t.address,t.contact from shippings s inner join  tquser t on s.tquser_id=t.id where s.tquser_id=$id");
+    	$query = $this->db->query("select s.id,s.title,s.description,s.date_time,s.expected_delivery,t.name,t.address,t.contact,s.source,s.destination from shippings s inner join  tquser t on s.tquser_id=t.id where s.tquser_id=$id order by  s.status,s.date_time");
     	return $query;
     }
     /*To get list of Recent Consignments*/

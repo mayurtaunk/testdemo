@@ -3,9 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Customer extends CI_Controller 
 {
 	/*Default Page*/
-	public function index()
+	public function loadbids()
 	{
-		$this->load->model('customer_model');
 		$show = $this->customer_model->getbids();
 		$showdata="<Strong><h4><b>Bids</b></h4></Strong>
 				   <div style='overflow: scroll; height: 300px;'' class='well'>";
@@ -13,24 +12,9 @@ class Customer extends CI_Controller
 		{
 			foreach ($show->result() as $row)
 			{
+
 				$detail=base_url('index.php/customer/details/'.$row->id.'/'.$row->carriers_id);
-				$showdata.="<div class='list-group'>
-				  <button type='button' class='list-group-item'>
-				  <div class='row'>
-			   			<div class='col-md-9'>
-               	    		<h2>$row->title</h2>
-               	    		<div class='row'>
-               	    			<div class='col-md-6'>
-                   	    		<p>$row->source - $row->destination</p>
-                   	    		</div>
-                   	    		<div class='col-md-6'>
-                   	    		<p>$row->amount</p>
-                   	    		</div>
-                   	    	</div>
-                    	</div>
-                        <div class='col-md-3' style='margin-top:30px;'><a href='".$detail."' class='btn btn-default btn-sm pull-right'> View </a></div>	
-				   	</div>
-				  	</button></div>";
+				$showdata.=$this->tqship->getConsignmentsWithBids($row->title,$row->source,$row->destination,$row->amount,$detail);
 			}
 			$showdata.="</div><div class='help-block'>*Click to open.</div>";
 		}
@@ -38,9 +22,15 @@ class Customer extends CI_Controller
 		{
 			$showdata .="<div class='well well-lg' style='text-align:center'><h3>No New Bids</h3></div>";
 		}
+		return $showdata;
+	}
+	public function index()
+	{
+		$this->load->model('customer_model');
+		
 		$data=array('panel_title'=> 'DashBoard',
 					'page' => 'customer/dashboard',
-					'showdata'=>$showdata);
+					'showdata'=>$this->loadbids());
 			$this->load->view('customer',$data);
 	}
 	/*Default Page*/
@@ -82,16 +72,9 @@ class Customer extends CI_Controller
 	{
 		$this->load->model('customer_model');
 		$show=$this->customer_model->biddetails($id,$cid);
-		if($show->num_rows() > 0)
+		foreach($show->result() as $row)
 		{
-			foreach($show->result() as $row)
-			{
-				$info=array('tid'=>$row->tid,'id'=>$id,'title'=>$row->title,'description'=>$row->description,'expdate'=>$row->expected_delivery,'from'=>$row->source,'to'=>$row->destination,'name'=>$row->name,'address'=>$row->address,'contact'=>$row->contact,'amount'=>$row->amount,'ddate'=>$row->date_of_delivery);
-			}
-		}
-		else
-		{
-			echo "Not Done";
+			$info=array('tid'=>$row->tid,'id'=>$id,'title'=>$row->title,'description'=>$row->description,'expdate'=>$row->expected_delivery,'from'=>$row->source,'to'=>$row->destination,'name'=>$row->name,'address'=>$row->address,'contact'=>$row->contact,'amount'=>$row->amount,'ddate'=>$row->date_of_delivery);
 		}
 		$data=array('panel_title'=> 'DashBoard',
 					'page' => 'customer/page2',
@@ -110,12 +93,14 @@ class Customer extends CI_Controller
 	/*New Consignment for Customer*/
 	public function newconsignment($pno)
 	{
+
 		if($pno==1)
 		{
 			/*pass title form here */
 			$data=array('panel_title'=> 'New Consignment',
 						'page' => 'newconsignment/newcon1',
-						);
+						'showbr'=>1);
+			$this->session->set_userdata("sno",1);
 			$this->load->view('customer',$data);
 		}
 		else if($pno==2)
@@ -126,7 +111,7 @@ class Customer extends CI_Controller
 			{
 				$data=array('panel_title'=> 'New Consignment',
 						'page' => 'newconsignment/newcon1',
-						);
+						'showbr'=>1,);
 				$this->load->view('customer',$data);
 			}
 			else
@@ -148,23 +133,18 @@ class Customer extends CI_Controller
 				$marker['position'] = $this->input->post('dcity');
 				$marker['infowindow_content'] = "Destination";
 				$marker['title']="Destination";
-
 				$this->googlemaps->add_marker($marker);
-				$polyline = array();
-				$polyline['points'] = array($this->input->post('scity'),$this->input->post('dcity'));
-				$polyline['strokeColor'] = "#FFFFFF";
-				$polyline['strokeOpacity']="0.5";
-				$polyline['strokeWeight'] = "5";
-
-				$this->googlemaps->add_polyline($polyline);
 				$this->googlemaps->initialize($config);
+
 				$this->session->set_userdata('scity',$this->input->post('scity'));
 				$this->session->set_userdata('dcity',$this->input->post('dcity'));
 				$data=array('panel_title'=> 'New Consignment',
 							'page' => 'newconsignment/newcon2',
 							'ismap'=>1,
+							'showbr'=>1,
 							'dist'=>ceil($this->getDistance($this->input->post('scity'),$this->input->post('dcity'),"k")). " Kilometers",
 							'map'=>$this->googlemaps->create_map());
+				$this->session->set_userdata("sno",2);
 				$this->load->view('customer',$data);
 			}
 		}
@@ -178,6 +158,7 @@ class Customer extends CI_Controller
 			{
 				$data=array('panel_title'=> 'New Consignment',
 						'page' => 'newconsignment/newcon2',
+						'showbr'=>1
 						);
 				$this->load->view('customer',$data);
 			}
@@ -188,8 +169,11 @@ class Customer extends CI_Controller
 				$this->session->set_userdata('daddress',$this->input->post('daddress'));
 				$this->session->set_userdata('dpincode',$this->input->post('dpincode'));
 				$data=array('panel_title'=> 'New Consignment',
-							'page' => 'newconsignment/newcon3');
+							'page' => 'newconsignment/newcon3',
+							'showbr'=>1);
+				$this->session->set_userdata("sno",3);
 				$this->load->view('customer',$data);
+				
 			}
 		}
 		else if($pno==4)
@@ -208,7 +192,7 @@ class Customer extends CI_Controller
 				$data=array(
 						'panel_title'=> 'New Consignment',
 						'page' => 'newconsignment/newcon3',
-						);
+						'showbr'=>1);
 				$this->load->view('customer',$data);
 			}
 			else
@@ -230,7 +214,9 @@ class Customer extends CI_Controller
 					$this->session->set_userdata('location','uploads/'.$filename);
 				}
 				$data=array('panel_title'=> 'New Consignment',
-							'page' => 'newconsignment/newcon4');
+							'page' => 'newconsignment/newcon4',
+							'showbr'=>1);
+				$this->session->set_userdata("sno",4);
 				$this->load->view('customer',$data);
 			}
 		}
@@ -255,9 +241,10 @@ class Customer extends CI_Controller
 				if($this->customer_model->insert() == 1)
 				{
 					$msg="<Strong> New Consignment Registered </strong>";
-					$data=array('panel_title'=> 'New Consignment',
-							'page' => 'newconsignment/newcon4',
-							'msg'=>$msg);
+					$data=array('panel_title'=> 'DashBoard',
+							'page' => 'customer/dashboard',
+							'msg'=>$msg,
+							'showdata'=>$this->loadbids());
 					$this->load->view('customer',$data);
 				}
 				else
@@ -286,22 +273,14 @@ class Customer extends CI_Controller
 				foreach ($show->result() as $row)
 				{
 					$details=base_url('index.php/customer/details_of_con/'.$row->id);
-					$showdata.="<div class='list-group'>
-				  					<button type='button' class='list-group-item'>
-				  						<div class='row'>
-			   								<div class='col-md-9'>
-               	    						<h2>$row->title</h2>
-                    					</div>
-                        				<div class='col-md-3' style='margin-top:20px;'><a class='btn btn-default btn-sm pull-right' href='".$details."'> Details </a></div>	
-				  					</button>
-				  				</div>"; 
+					$showdata.=$this->tqship->getConsignments($row->title,$row->source,$row->destination,$details);
 				}
-				$showdata.="</div>";
 			}
 			else
 			{
 				$showdata .="<div class='well well-lg' style='text-align:center'><h3>No New requests</h3></div>";
 			}
+			$showdata.="</div>";
 			$data=array('panel_title'=> 'Recent Consignment',
 						'page' => 'recentconsignment/reccon1',
 						'reccon'=>$showdata);
@@ -313,18 +292,9 @@ class Customer extends CI_Controller
 	public function details_of_con($id)
 	{
 		$cid=$id;
-		$queryy = $this->db->query("select source,destination,id,title,description,date_time,expected_delivery from shippings where id='".$cid."'");
-		if ($queryy->num_rows() > 0)
-		{
-			foreach ($queryy->result() as $row)
-			{	
-				$info=array('id'=>$row->id,'title'=>$row->title,'description'=>$row->description,'date'=>$row->date_time,'expdate'=>$row->expected_delivery,'from'=>$row->source,'to'=>$row->destination);
-			}
-		}
-		else
-		{
-			echo "nottt done";
-		}
+		$queryy = $this->db->query("select source,destination,id,title,description,date_time,expected_delivery,image from shippings where id='".$cid."'");
+		$row=$queryy->row();
+		$info=array('id'=>$row->id,'title'=>$row->title,'description'=>$row->description,'date'=>$row->date_time,'expdate'=>$row->expected_delivery,'from'=>$row->source,'to'=>$row->destination,'img'=>$row->image);
 		$data=array('panel_title'=> 'Recent Consignment',
 					'page' => 'recentconsignment/reccon2',
 					'show'=>$info);
@@ -335,31 +305,15 @@ class Customer extends CI_Controller
 	public function bids_for_con($id)
 	{
 		$queryy = $this->db->query("select image,title from shippings where id='".$id."'");
-		$query2 = $this->db->query("select s.amount,s.date_of_delivery,t.name,t.address,t.contact,t.id from sresponse s inner join tquser t on s.carriers_id=t.id where shippings_id='".$id."'");
-		if ($queryy->num_rows() > 0)
-		{
-			foreach ($queryy->result() as $row)
-			{	
-				$detail=array('title'=>$row->title,'image'=>$row->image);
-			}
-		}
-		else
-		{
-			echo "nottt done";
-		}
+		$query2 = $this->db->query("select s.amount,s.date_of_delivery,t.name,t.address,t.contact,t.id from sresponse s inner join tquser t on s.carriers_id=t.id where shippings_id=".$id." order by s.amount desc");
+		$row=$queryy->row();
+		$detail=array('title'=>$row->title,'image'=>$row->image);
 		$showdata="<div style='overflow: scroll; height: 170px;  border-style: solid; border-width: 5px 0px 0px 0px; border-color:#f2f2f2;'>";
 		if ($query2->num_rows() > 0)
 		{
 			foreach ($query2->result() as $row)
 			{	
-				$showdata.="<ul class='list-group'>
-								<button type='button' class='list-group-item'>
-			  						<div class='row'>
-		   								<div class='col-md-9'>
-           	    						<h3>$row->amount</h3>
-                					</div>
-                    				<div class='col-md-3' style='margin-top:20px;'><a type='button' class='btn btn-default btn-sm pull-right' id='view' data-id='$row->id'> View </a></div>	
-				  				</button>";
+				$showdata.=$this->tqship->getBids($row->id,$row->amount);
 			}
 			$showdata.="</div>";
 		}

@@ -82,12 +82,14 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+			<div class="pull-right">
 				<a href="" class="btn btn-danger"> 
 					Reject<i class="glyphicon"></i>
 				</a>
 	 			<a href="" class="btn btn-success"> 
 	 				Approve<i class="glyphicon"></i>
 	 			</a>
+	 		</div>
 			</div>
 		</div>
 	</div>
