@@ -69,8 +69,6 @@ class Admin extends CI_Controller
 								</div>
 	  						</div>
 	  						<div class='col-md-4'>
-	  							<a href='".$reject."' class='btn btn-danger' style='padding:20px'> Reject <i class='glyphicon'></i></a>
-								<a href='".$accept."' class='btn btn-success' style='padding:20px'> Approve <i class='glyphicon'></i></a>
 							</div>
 							</div>
 					  	</button>

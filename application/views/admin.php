@@ -187,9 +187,9 @@
     				console.log(data);
     			}
     		});
->>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 		});
     });
+});
 </script>
 </body>
 </html> 
