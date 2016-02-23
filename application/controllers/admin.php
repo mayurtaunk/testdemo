@@ -39,12 +39,7 @@ class Admin extends CI_Controller
 				$accept= base_url('index.php/admin/acceptuser/'.$row->id);*/
 				$showdata .="
 					<div class='list-group'>
-<<<<<<< HEAD
-						<button id='approvecarrier' data-id=$row->id type='button' class='list-group-item'>
-	  						<label class='control-label' for='textinput'>$row->name</label><br>
-	  						<label class='control-label' for='textinput'>$row->address</label><br>
-	  						<label class='control-label' for='textinput'>$row->contact</label><br>
-=======
+
 						<button data-toggle='modal' data-target='#carrierdetails' type='button' class='list-group-item'>
 							<div class='row cfont minorcontent'>
 							<div class='col-md-8'>
@@ -78,7 +73,6 @@ class Admin extends CI_Controller
 								<a href='".$accept."' class='btn btn-success' style='padding:20px'> Approve <i class='glyphicon'></i></a>
 							</div>
 							</div>
->>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 					  	</button>
 					</div>";
 			}

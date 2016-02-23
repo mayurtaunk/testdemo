@@ -132,7 +132,6 @@
     			}
     		});
     	});
-<<<<<<< HEAD
 		$(document).delegate("#approvecarrier","click",function(e){
 			e.preventDefault();
 			var id= $(this).data('id');
@@ -164,7 +163,6 @@
 					$('#carrierdetails').modal('show');
 				}
 			});
-=======
 		$(document).delegate("#sbtn","click",function(e){
 			 jQuery.ajax({
     			url : baseurl + "index.php/admin/getCustomer",

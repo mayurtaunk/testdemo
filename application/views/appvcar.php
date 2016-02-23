@@ -82,12 +82,9 @@
 				<!-- </div> -->
 			</div>
 			<div class="modal-footer">
-<<<<<<< HEAD
-				<a id="reject" href="" class="btn btn-danger"> 
-=======
+
 			<div class="pull-right">
-				<a href="" class="btn btn-danger"> 
->>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
+				<a id="reject" href="" class="btn btn-danger"> 
 					Reject<i class="glyphicon"></i>
 				</a>
 	 			<a id="accept" href="" class="btn btn-success"> 

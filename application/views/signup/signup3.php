@@ -61,11 +61,8 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-home"></i>
 										</span>
-<<<<<<< HEAD
 										<input class="form-control input" placeholder="City" type="text" name="city" data-country="in" value="<?php echo set_value('city'); ?>"  autocomplete="off" id="city">
-=======
-										<input class="form-control input" placeholder="City" type="text" name="city" data-country="in" id="city" autocomplete="off">
->>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
+
 									</div>
 									<p class="help-block"><?php echo form_error('city'); ?></p>
 								</div>
