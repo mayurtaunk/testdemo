@@ -14,7 +14,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-sort-by-alphabet"></i>
 								</span>
-								<input class="form-control" type="text" placeholder="Title Of Consignment" name="title"> <br>
+								<input class="form-control" type="text" placeholder="Title Of Consignment" value="<?php echo set_value('title'); ?>" name="title"> <br>
 							</div>
 						</div>
 						<div class="form-group">
@@ -22,7 +22,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-sort-by-alphabet"></i>
 								</span>
-								<textarea class="form-control" placeholder="Description" name="desc" rows="3"></textarea><br>
+								<textarea class="form-control" placeholder="Description" value="<?php echo set_value('desc'); ?>" name="desc" rows="3"></textarea><br>
 							</div>
 						</div>
 						<div class="form-group">
@@ -30,7 +30,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
-								<input class="form-control" placeholder="When You Ecpect It To Be Delivered" type="text" name="expdate" id="expdate" readonly> <br>
+								<input class="form-control" placeholder="When You Ecpect It To Be Delivered" type="text" value="<?php echo set_value('expdate'); ?>" name="expdate" id="expdate" readonly> <br>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-success pull-right">Post</button>

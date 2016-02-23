@@ -1,4 +1,3 @@
-
 	<div class="row">
 		<div class="col-md-12">
 			<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\3'); ?>" method="post">
@@ -18,7 +17,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-map-marker"></i>
 								</span>
-								<textarea class="form-control" placeholder="Address" name="saddress" rows="3"></textarea><br>
+								<textarea class="form-control" placeholder="Address" name="saddress" value="<?php echo set_value('saddress'); ?>" rows="3"></textarea><br>
 							</div>
 							<p class="help-block"><?php echo form_error('saddress'); ?></p>
 						</div>
@@ -27,7 +26,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</span>
-								<input class="form-control" type="number" placeholder="Pin Code" name="spincode"> <br>
+								<input class="form-control" type="number" placeholder="Pin Code" value="<?php echo set_value('spincode'); ?>" name="spincode"> <br>
 							</div>
 							<p class="help-block"><?php echo form_error('spincode'); ?></p>
 						</div>
@@ -37,7 +36,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-map-marker"></i>
 								</span>
-								<textarea class="form-control" placeholder="Address" name="daddress" rows="3"></textarea><br>
+								<textarea class="form-control" placeholder="Address" name="daddress" value="<?php echo set_value('daddress'); ?>" rows="3"></textarea><br>
 							</div>
 							<p class="help-block"><?php echo form_error('daddress'); ?></p>
 						</div>
@@ -46,7 +45,7 @@
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-envelope"></i>
 								</span>
-								<input class="form-control" type="number" placeholder="Pin Code" name="dpincode"> <br>
+								<input class="form-control" type="number" placeholder="Pin Code" value="<?php echo set_value('dpincode'); ?>" name="dpincode"> <br>
 							</div>
 							<p class="help-block"><?php echo form_error('dpincode'); ?></p>
 						</div>

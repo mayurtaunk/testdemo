@@ -71,31 +71,31 @@
       		<div class="modal-body">
       			<div class="row">
       				<div class="col-md-1"></div>
-      				<div class="col-md-10 well well-sm">
-      					<div class="row">
-      						<div class="col-md-6">
+      				<div class="col-md-2">
+      					<!-- <div class="row"> -->
+      						<!-- <div class="col-md-6"> -->
   							  <div href="#" class="thumbnail">
   							    <img src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
   							    <div class = "caption">
          							<div class="pic_caption">Identity Proof</div>
          						</div>
   							  </div>
-  							</div>
-  							<div class="col-md-6">
+  							<!-- </div> -->
+  							<!-- <div class="col-md-6">
   							  <div href="#" class="thumbnail">
   							    <img id="crimg" src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
   							    <div class = "caption">
          							<div class="pic_caption">Person Image</div>
          						</div>
   							  </div>
-  							</div>
-  						</div>
+  							</div> -->
+  						<!-- </div> -->
   					</div>
-      				<div class="col-md-1"></div>
-      			</div>
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10 well well-sm">
+      				<!-- <div class="col-md-1"></div>
+      			</div> -->
+				<!-- <div class="row"> -->
+					<!-- <div class="col-md-1"></div> -->
+					<div class="col-md-8 well well-sm">
 						<div class="form-group">							
 							<label class="col-md-4 control-label viewdata" for="textinput">Name:</label>
 							<label class="col-md-8 control-label" for="crname" id="crname">Name</label>

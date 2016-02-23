@@ -13,7 +13,7 @@
 						<div href="#" class="thumbnail">
   							<img id="imppr" src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
   						</div>
-						<input id="uploadFile" type="file" name="userfile" value="Choose Image" class="img" />
+						<input id="uploadFile" type="file" name="userfile" value="Choose Image" class="img" value="<?php echo set_value('userfile'); ?>" />
   						<p class="help-block"><?php echo form_error('userfile'); ?></p>
 					</div>
 				</div>
@@ -23,7 +23,7 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-resize-horizontal"></i>
 							</span>
-							<input type="number" class="form-control" name="width" placeholder="Width">
+							<input type="number" class="form-control" name="width" value="<?php echo set_value('width'); ?>" placeholder="Width">
 						</div>
 						<p class="help-block"><?php echo form_error('width'); ?></p>
 					</div>
@@ -32,7 +32,7 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-resize-vertical"></i>
 							</span>
-							<input type="number" class="form-control" name="height" placeholder="Height">
+							<input type="number" class="form-control" name="height" value="<?php echo set_value('height'); ?>" placeholder="Height">
 						</div>
 						<p class="help-block"><?php echo form_error('height'); ?></p>
 					</div>
@@ -41,7 +41,7 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-sort-by-alphabet-alt"></i>
 							</span>
-							<input type="number" class="form-control" name="weight" placeholder="Weight">
+							<input type="number" class="form-control" name="weight" value="<?php echo set_value('weight'); ?>" placeholder="Weight">
 						</div>
 						<p class="help-block"><?php echo form_error('weight'); ?></p>
 					</div>

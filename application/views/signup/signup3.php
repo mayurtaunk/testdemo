@@ -4,6 +4,8 @@
 	<link href=<?php echo base_url("css/bootstrap.min.css")?> rel="stylesheet">
 	<link href=<?php echo base_url("css/dp.css")?> rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link href="<?php echo base_url("css/city-autocomplete.css")?>" rel="stylesheet">
+
 	<style type="text/css">	
 		.top-margin
 		{
@@ -31,7 +33,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-user"></i>
 										</span>
-										<input class="form-control" placeholder="Name" type="text" name="name" autofocus>
+										<input class="form-control" placeholder="Name" type="text" name="name" value="<?php echo set_value('name'); ?>" autofocus>
 									</div>
 									<p class="help-block"><?php echo form_error('name'); ?></p>
 								</div>
@@ -40,7 +42,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-map-marker"></i>
 										</span>
-										<textarea class="form-control input" placeholder="Address" rows="3" type="textarea" name="address"></textarea>
+										<textarea class="form-control input" placeholder="Address" rows="3" type="textarea"  name="address"><?php echo set_value('address'); ?></textarea>
 									</div>
 									<p class="help-block"><?php echo form_error('address'); ?></p>
 								</div>
@@ -49,7 +51,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-earphone"></i>
 										</span>
-										<input class="form-control input" placeholder="Contact" type="number" name="contact">
+										<input class="form-control input" placeholder="Contact" type="number" name="contact"  value="<?php echo set_value('contact'); ?>">
 									</div>
 									<p class="help-block"><?php echo form_error('contact'); ?></p>
 								</div>
@@ -58,7 +60,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-home"></i>
 										</span>
-										<input class="form-control input" placeholder="City" type="text" name="city">
+										<input class="form-control input" placeholder="City" type="text" name="city" data-country="in" value="<?php echo set_value('city'); ?>"  autocomplete="off" id="city">
 									</div>
 									<p class="help-block"><?php echo form_error('city'); ?></p>
 								</div>
@@ -67,7 +69,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-calendar"></i>
 										</span>
-										<input class="form-control input datepicker" placeholder="Date Of Birth" id="dob" type="text" name="dob">
+										<input class="form-control input datepicker" placeholder="Date Of Birth" id="dob" type="text" value="<?php echo set_value('dob'); ?>" name="dob">
 									</div>
 									<p class="help-block"><?php echo form_error('dob'); ?></p>
 								</div>							
@@ -107,9 +109,15 @@
 <script src=<?php echo base_url("js/jq.js")?>></script>
 <script src=<?php echo base_url("js/bootstrap.min.js")?>></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src=<?php echo base_url("js/jquery.city-autocomplete.js")?>></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+<script>
+	$('#city').cityAutocomplete();
+</script>
 <script>
 	$(function() {
- 		$( "#dob" ).datepicker({ maxDate: new Date() });
+ 		$( "#dob" ).datepicker({ maxDate: new Date(),changeMonth: true,
+      changeYear: true });
 	});
 </script>
 <!-- <script src=<?php //echo base_url("js/bootstrap-datepicker.js")?>></script>

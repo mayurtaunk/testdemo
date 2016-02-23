@@ -29,7 +29,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-envelope"></i>
 										</span>
-										<input class="form-control" placeholder="Email" type="email" name="email" autofocus>
+										<input class="form-control" placeholder="Email" type="email" value="<?php echo set_value('email'); ?>" name="email" autofocus>
 									</div>
 									<p class="help-block"><?php echo form_error('email'); ?></p>
 								</div>

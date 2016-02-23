@@ -37,7 +37,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-user"></i>
 										</span>
-										<input class="form-control" placeholder="Username" type="text"  name="username" autofocus>
+										<input class="form-control" placeholder="Username" type="text" value="<?php echo set_value('username'); ?>" name="username" autofocus>
 									</div>
 									<p class="help-block"><?php echo form_error('username'); ?></p>
 								</div>
@@ -71,10 +71,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- Login Form End -->
-<script src="js/jq.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
 </body>
 </html>

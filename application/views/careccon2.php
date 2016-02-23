@@ -72,13 +72,13 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="textinput">Amount: </label> 
 							<div class="col-md-9">
-								<input type="text" name="amount" id="amount" placeholder="Amount" class="form-control" value="<?php echo $show['amount'];?>" disabled> <br>
+								<input type="text" name="amount" id="amount" value="<?php echo set_value('amount'); ?>" placeholder="Amount" class="form-control" value="<?php echo $show['amount'];?>" disabled> <br>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="textinput">Delivery Date: </label> 
 							<div class="col-md-9">
-								<input type="text" name="deliverydate" id="deliverydate" placeholder="Delivery Date" class="form-control" value="<?php echo $show['ddate'];?>" disabled> <br>
+								<input type="text" name="deliverydate" id="deliverydate"  value="<?php echo set_value('deliverydate'); ?>"placeholder="Delivery Date" class="form-control" value="<?php echo $show['ddate'];?>" disabled> <br>
 							</div>
 						</div>
 						<form class="form-horizontal" action="<?php echo base_url('index.php/carrier/notdone/'.$show['id']);?>" method="post">

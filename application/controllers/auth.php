@@ -23,7 +23,7 @@ class Auth extends CI_Controller
 		else if($pno==3)
 		{
 			$this->form_validation->set_rules('email', 'Username', 'required|is_unique[tquser.email]');
-			$this->form_validation->set_rules('password', 'Password', 'required|is_unique[users.auth_key]');
+			$this->form_validation->set_rules('password', 'Password', 'required');
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->load->view('signup/signup2');

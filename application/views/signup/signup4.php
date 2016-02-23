@@ -30,7 +30,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-question-sign"></i>
 										</span>
-										<input class="form-control" placeholder="Question ex. My First Car." type="text" name="question" autofocus>
+										<input class="form-control" placeholder="Question ex. My First Car." type="text" value="<?php echo set_value('question'); ?>" name="question" autofocus>
 									</div>
 									<p class="help-block"><?php echo form_error('question'); ?></p>
 								</div>
@@ -39,7 +39,7 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-font"></i>
 										</span>
-										<input class="form-control" placeholder="Answer" type="text" id="answer" name="answer"> 
+										<input class="form-control" placeholder="Answer" type="text" value="<?php echo set_value('answer'); ?>" id="answer" name="answer"> 
 									</div>
 									<p class="help-block"><?php echo form_error('answer'); ?></p>
 								</div>

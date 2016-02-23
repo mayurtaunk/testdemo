@@ -27,16 +27,14 @@ class Admin extends CI_Controller
 		{
 			foreach ($show->result() as $row)
 			{
-				$reject= base_url('index.php/admin/rejectuser/'.$row->id);
-				$accept= base_url('index.php/admin/acceptuser/'.$row->id);
+				/*$reject= base_url('index.php/admin/rejectuser/'.$row->id);
+				$accept= base_url('index.php/admin/acceptuser/'.$row->id);*/
 				$showdata .="
 					<div class='list-group'>
-						<button data-toggle='modal' data-target='#carrierdetails' type='button' class='list-group-item'>
+						<button id='approvecarrier' data-id=$row->id type='button' class='list-group-item'>
 	  						<label class='control-label' for='textinput'>$row->name</label><br>
 	  						<label class='control-label' for='textinput'>$row->address</label><br>
 	  						<label class='control-label' for='textinput'>$row->contact</label><br>
-	  						<a href='".$reject."' class='btn btn-danger'> Reject <i class='glyphicon'></i></a>
-							<a href='".$accept."' class='btn btn-success'> Approve <i class='glyphicon'></i></a>
 					  	</button>
 					</div>";
 			}
@@ -160,6 +158,12 @@ class Admin extends CI_Controller
 	public function fetchcarrierdata()
 	{
 		$query=$this->db->query('select u.id,t.name,t.address,t.contact,t.city,t.dob,t.email,t.gender from users u inner join tquser t on u.tquser_id=t.id where status=1 and type=1 and u.id='.$this->input->post('id'));
+       	echo json_encode($query->row());
+	}
+	public function carrierdetail()
+	{
+		//$query=$this->db->query('select u.id,t.name,t.address,t.contact,t.city,t.dob,t.email,t.gender from users u inner join tquser t on u.tquser_id=t.id where status=0 and type=1 and u.id='.$this->input->post('id'));
+		$query=$this->db->query('select u.id,t.name,t.address,t.contact,t.city,t.dob,t.email,t.gender,c.id_proof from users u inner join tquser t on u.tquser_id=t.id inner join carriers c on t.id=c.tquser_id where u.status=0 and u.type=1 and u.id='.$this->input->post('id'));
        	echo json_encode($query->row());
 	}
 	/*For Model Showing Carrier Details*/

@@ -106,6 +106,7 @@
     	$(document).delegate("#cr","click",function(e){
         	e.preventDefault();
 			var id=$(this).data('id');
+
     		jQuery.ajax({
     			url : baseurl + "index.php/admin/fetchcarrierdata",
     			type : "POST",
@@ -114,8 +115,8 @@
     			async : false,
     			success:function(data){
     				console.log(data);
+
     				data = JSON.parse(data);
-    				
     				var href= baseurl + "index.php/admin/deactuser/" + id;
     				console.log(href);
     				var gen =(data["gender"])?"Male":"Female";
@@ -127,11 +128,42 @@
         	  		$("label[for='crcity']").html(data["city"]);
         	  		$("label[for='cremail']").html(data["email"]);
         	  		$('#reject').attr('href',href);
-        	  		//$("#reject").prop('href', baseurl+"index.php/admin/deactuser/"+ id);
         	  		$('#carrierdetails').modal('show'); 
     			}
     		});
     	});
+		$(document).delegate("#approvecarrier","click",function(e){
+			e.preventDefault();
+			var id= $(this).data('id');
+			console.log(id);
+			jQuery.ajax({
+				url : baseurl + "index.php/admin/carrierdetail",
+				type : "POST",
+				dataType : "text",
+				data : {id:$(this).data('id')},
+				async : false,
+				success:function(data){
+					data = JSON.parse(data);
+					console.log(data);
+					var hrefr = baseurl + "index.php/admin/rejectuser/" + id;
+					var hrefa = baseurl + "index.php/admin/acceptuser/" + id;
+					var image = baseurl + data['id_proof'];
+					var gen =(data["gender"])?"Male":"Female";
+					$("label[for='name']").html(data['name']);
+					$("label[for='address']").html(data['address']);
+					$("label[for='gender']").html(gen);
+					//$("label[for='gender']").html(data['gender']);
+					$("label[for='dob']").html(data['dob']);
+					$("label[for='contact']").html(data['contact']);
+					$("label[for='email']").html(data['email']);
+					$("label[for='city']").html(data['city']);
+					$('#image').attr('src',image);
+					$('#reject').attr('href',hrefr);
+					$('#accept').attr('href',hrefa);
+					$('#carrierdetails').modal('show');
+				}
+			});
+		});
     });
 </script>
 </body>

@@ -73,16 +73,16 @@
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="textinput">Amount: </label> 
 							<div class="col-md-9">
-								<input type="text" name="amount" id="amount" placeholder="Amount" class="form-control"> <br>
+								<input type="text" name="amount" id="amount" placeholder="Amount" value="<?php echo set_value('amount'); ?>" class="form-control"> <br>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-3 control-label" for="textinput">Delivery Date: </label> 
 							<div class="col-md-9">
-								<input type="text" name="deliverydate" id="deliverydate" placeholder="Delivery Date" class="form-control" readonly> <br>
+								<input type="text" name="deliverydate" id="deliverydate" value="<?php echo set_value('deliverydate'); ?>" placeholder="Delivery Date" class="form-control" readonly> <br>
 							</div>
 						</div>
-						<form class="form-horizontal" action="<?php echo base_url('index.php/carrier/bid/'.$show['id']);?>" method="post">
+						<form class="form-horizontal" action="<?php echo base_url('index.php/carrier/bid/'.$show['id']);?>"  method="post">
 						<div class="form-group">
 							<button type="submit" class="btn btn-info pull-right"> Mark As Done </button>
 						</div>
