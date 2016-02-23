@@ -3,6 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller 
 {
+	public function getCustomer()
+	{
+		echo $this->tqship->getCustomerList($this->input->post('name'));
+	}
+	public function getCarrier()
+	{
+		echo $this->tqship->getCarrierList($this->input->post('name'));
+	}
 	public function index()
 	{
 		$this->load->model('admin_model');
@@ -31,10 +39,46 @@ class Admin extends CI_Controller
 				$accept= base_url('index.php/admin/acceptuser/'.$row->id);*/
 				$showdata .="
 					<div class='list-group'>
+<<<<<<< HEAD
 						<button id='approvecarrier' data-id=$row->id type='button' class='list-group-item'>
 	  						<label class='control-label' for='textinput'>$row->name</label><br>
 	  						<label class='control-label' for='textinput'>$row->address</label><br>
 	  						<label class='control-label' for='textinput'>$row->contact</label><br>
+=======
+						<button data-toggle='modal' data-target='#carrierdetails' type='button' class='list-group-item'>
+							<div class='row cfont minorcontent'>
+							<div class='col-md-8'>
+								<div class='row'>
+									<div class='col-md-3'>
+	  									<label class='control-label pull-right' for='textinput'>Name :</label>
+									</div>
+									<div class='col-md-9'>
+	  									<label class='control-label' for='textinput'>$row->name</label>
+									</div>
+								</div>
+								<div class='row'>
+									<div class='col-md-3'>
+	  									<label class='control-label pull-right' for='textinput'>Address :</label>
+									</div>
+									<div class='col-md-9'>
+	  									<label class='control-label' for='textinput'>$row->address</label><br>
+									</div>
+								</div>
+								<div class='row'>
+									<div class='col-md-3'>
+	  									<label class='control-label pull-right' for='textinput'>Contact :</label>
+									</div>
+									<div class='col-md-9'>
+	  									<label class='control-label' for='textinput'>$row->contact</label><br>
+									</div>
+								</div>
+	  						</div>
+	  						<div class='col-md-4'>
+	  							<a href='".$reject."' class='btn btn-danger' style='padding:20px'> Reject <i class='glyphicon'></i></a>
+								<a href='".$accept."' class='btn btn-success' style='padding:20px'> Approve <i class='glyphicon'></i></a>
+							</div>
+							</div>
+>>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 					  	</button>
 					</div>";
 			}
@@ -65,51 +109,9 @@ class Admin extends CI_Controller
 	/*Deactivate Profile*/
 	public function deactpro()
 	{
-		$this->load->model('admin_model');
-		$showcustomer = $this->admin_model->getcustomer();
-		$showdata="<div style='overflow: scroll; height: 300px;'>";
-		if($showcustomer->num_rows()>0)
-		{
-			foreach ($showcustomer->result() as $row)
-			{
-				$showdata.="<div class='list-group'>
-					  			<button id='cu' data-id=$row->id  type='button' class='list-group-item'>
-					  				<label class='control-label' for='textinput'>
-					  				$row->name</label><br>
-					  				<label class='control-label' for='textinput'>$row->address</label><br>
-					  				<label class='control-label' for='textinput'>$row->contact</label><br>
-					  			</button>
-					  		</div>";
-			}
-			$showdata .="</div>";
-		}
-		else
-		{
-			$showdata .="<div class='well well-lg' style='text-align:center'><h3>No Customers</h3></div></div>";
-		}
-		$showcarrier = $this->admin_model->getcarrier();
-		$showcar="<div style='overflow: scroll; height: 300px;'>";
-		if($showcarrier->num_rows()>0)
-		{
-			foreach ($showcarrier->result() as $row)
-			{
-				$showcar.="<div class='list-group'>
-					  			<button id='cr' data-id=$row->id type='button' class='list-group-item'>
-					  				<label class='control-label' for='textinput'>
-					  				$row->name</label><br>
-					  				<label class='control-label' for='textinput'>$row->address</label><br>
-					  				<label class='control-label' for='textinput'>$row->contact</label><br>
-					  			</button></div>";
-			}
-			$showcar .="</div>";
-		}
-		else
-		{
-			$showcar .="<div class='well well-lg' style='text-align:center'><h3>No Carriers</h3></div>";
-		}
-
-
-		$data=array('panel_title' => 'Deactivate Carrier/Clients','page' => 'deactivate_profile','nocustomer'=>$showdata,'nocarrier'=>$showcar);
+		$showdata=$this->tqship->getCustomerList($name="");
+		$showcar=$this->tqship->getCarrierList($name="");
+		$data=array('panel_title' => 'Deactivate Carrier/Clients','page' => 'admin/deactivate_profile','nocustomer'=>$showdata,'nocarrier'=>$showcar);
 		$this->load->view('admin',$data);
 	}
 	/*Deactivate Profile*/

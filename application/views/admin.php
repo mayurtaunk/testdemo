@@ -132,6 +132,7 @@
     			}
     		});
     	});
+<<<<<<< HEAD
 		$(document).delegate("#approvecarrier","click",function(e){
 			e.preventDefault();
 			var id= $(this).data('id');
@@ -163,6 +164,32 @@
 					$('#carrierdetails').modal('show');
 				}
 			});
+=======
+		$(document).delegate("#sbtn","click",function(e){
+			 jQuery.ajax({
+    			url : baseurl + "index.php/admin/getCustomer",
+    			type : "POST",
+    			dataType : "text",
+    			data : {name:$("#scust").val()},
+    			async : false,
+    			success:function(data){
+    				$("#dCustomerData").html(data);
+    			}
+    		});
+		});
+		$(document).delegate("#sbtncl","click",function(e){
+			 jQuery.ajax({
+    			url : baseurl + "index.php/admin/getCarrier",
+    			type : "POST",
+    			dataType : "text",
+    			data : {name:$("#scar").val()},
+    			async : false,
+    			success:function(data){
+    				$("#dcarrierdata").html(data);
+    				console.log(data);
+    			}
+    		});
+>>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 		});
     });
 </script>

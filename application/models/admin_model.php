@@ -23,16 +23,16 @@ class Admin_model extends CI_Model
 	}
 	/*To get count of Carriers for Dasboard*/
 	/*To get list of active customers for deactivating profile*/
-	function getcustomer()
+	function getcustomer($name)
     {
-    	$query = $this->db->query('select u.id,t.name,t.address,t.contact from users u inner join tquser t on u.tquser_id=t.id where status=1 and type=2');
+    	$query = $this->db->query("select u.id,t.name,t.address,t.contact from users u inner join tquser t on u.tquser_id=t.id where status=1 and type=2 and name like'%$name%'");
     	return $query;
     }
     /*To get list of active customers for deactivating profile*/
     /*To get list of active carriers for deactivating profile*/
-    function getcarrier()
+    function getcarrier($name)
     {
-    	$query = $this->db->query('select u.id,t.name,t.address,t.contact from users u inner join tquser t on u.tquser_id=t.id where status=1 and type=1');
+    	$query = $this->db->query("select u.id,t.name,t.address,t.contact from users u inner join tquser t on u.tquser_id=t.id where status=1 and type=1 and t.name like '%$name%'");
     	return $query;
     }
     /*To get list of active carriers for deactivating profile*/

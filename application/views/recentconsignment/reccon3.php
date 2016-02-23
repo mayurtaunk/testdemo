@@ -53,18 +53,16 @@
   							<div class="row">
   								<div class="col-md-1"></div>
 								<div class="col-md-8">
+									<label class="control-label">Consignment ID</label>
 									<input class="form-control" placeholder="Id" type="text" name="title" value="<?php echo $id;?>" disabled ><br>
+									<label class="control-label">Consignment Title</label>
 									<input class="form-control" placeholder="Title" type="text" name="title" value="<?php echo $show['title'];?>" disabled ><br>
 								</div>
 								<div class="col-md-2">
 									<div class="form-group" >
 										<div class="thumbnail">
-											<img src="<?php echo $show['image'] ?>" >
-											<div class="caption">
-												<div class="pic_caption">
-													Consignment Picture
-												</div>
-											</div>
+											<img src="<?php echo base_url($show['image']); ?>">
+											
 										</div>
   									</div>
 								</div>

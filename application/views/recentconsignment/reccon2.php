@@ -50,7 +50,7 @@
 			<div class="col-md-4">
 				<div class="form-group" style="margin:40px;">
 					<div href="#" class="thumbnail">
-						<img src="<?php echo base_url("img/defaultperson.gif"); ?>" alt="...">
+						<img src="<?php echo ($show['img']=="")?base_url("img/defaultperson.gif"):base_url($show['img']); ?>" width=200 height=300 alt="...">
 					</div>
 					<button type="submit" href="<?php echo base_url('index.php/customer/recentconsignment/3/1');?>" class="btn btn-info">View Bids</button>
 				</div>

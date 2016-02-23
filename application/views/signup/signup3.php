@@ -3,6 +3,7 @@
 <head>
 	<link href=<?php echo base_url("css/bootstrap.min.css")?> rel="stylesheet">
 	<link href=<?php echo base_url("css/dp.css")?> rel="stylesheet">
+	<link href="<?php echo base_url("css/city-autocomplete.css")?>" rel="stylesheet">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<link href="<?php echo base_url("css/city-autocomplete.css")?>" rel="stylesheet">
 
@@ -60,7 +61,11 @@
 										<span class="input-group-addon">
 											<i class="glyphicon glyphicon-home"></i>
 										</span>
+<<<<<<< HEAD
 										<input class="form-control input" placeholder="City" type="text" name="city" data-country="in" value="<?php echo set_value('city'); ?>"  autocomplete="off" id="city">
+=======
+										<input class="form-control input" placeholder="City" type="text" name="city" data-country="in" id="city" autocomplete="off">
+>>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 									</div>
 									<p class="help-block"><?php echo form_error('city'); ?></p>
 								</div>
@@ -108,6 +113,7 @@
 
 <script src=<?php echo base_url("js/jq.js")?>></script>
 <script src=<?php echo base_url("js/bootstrap.min.js")?>></script>
+<script src=<?php echo base_url("js/jquery.city-autocomplete.js")?>></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src=<?php echo base_url("js/jquery.city-autocomplete.js")?>></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
@@ -119,6 +125,10 @@
  		$( "#dob" ).datepicker({ maxDate: new Date(),changeMonth: true,
       changeYear: true });
 	});
+</script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&language=en"></script>
+<script>
+$('#city').cityAutocomplete();
 </script>
 <!-- <script src=<?php //echo base_url("js/bootstrap-datepicker.js")?>></script>
 <script type="text/javascript">

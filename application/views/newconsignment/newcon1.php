@@ -17,7 +17,11 @@
 								<i class="glyphicon glyphicon-home"></i>
 							</span>
 						
+<<<<<<< HEAD
 							<input id="scity" class="form-control" type="text" autocomplete="off" placeholder="Source City" name="scity" value="<?php echo set_value('scity'); ?>" data-country="in"> <br>
+=======
+							<input id="scity" class="form-control" type="text" autocomplete="off" placeholder="Source City" name="scity" data-country="in" value="<?php echo set_value('scity');?>"> <br>
+>>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 						</div>
 						<p class="help-block"><?php echo form_error('scity'); ?></p>
 					</div>
@@ -26,7 +30,11 @@
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-home"></i>
 							</span>
+<<<<<<< HEAD
 							<input id="dcity" class="form-control" autocomplete="off" type="text" placeholder="Destination City" name="dcity" value="<?php echo set_value('dcity'); ?>" data-country="in"> <br>
+=======
+							<input id="dcity" class="form-control" autocomplete="off" type="text" placeholder="Destination City" name="dcity" data-country="in" value="<?php echo set_value('dcity');?>"> <br>
+>>>>>>> 322523a1fbf3c9794ac572d9772146390ff8314b
 						</div>
 						<p class="help-block"><?php echo form_error('dcity'); ?></p>
 					</div>

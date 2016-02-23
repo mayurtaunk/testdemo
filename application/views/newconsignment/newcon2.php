@@ -1,6 +1,6 @@
 	<div class="row">
 		<div class="col-md-12">
-			<form class="form-horizontal" action="<?php echo base_url('index.php\customer\newconsignment\3'); ?>" method="post">
+			<form class="form-horizontal" action="<?php echo base_url('index.php/customer/newconsignment/3'); ?>" method="post">
 				<div class="row">
 					<div class="col-md-12">
 						<h4 style="margin:20px;"><span class="label label-default">Step 2</span><b> I Would Like to Know More </b></h4>
