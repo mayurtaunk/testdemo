@@ -40,7 +40,7 @@ class Admin extends CI_Controller
 				$showdata .="
 					<div class='list-group'>
 
-						<button data-toggle='modal' data-target='#carrierdetails' type='button' class='list-group-item'>
+						<button id='approvecarrier' data-id=$row->id type='button' class='list-group-item'>
 							<div class='row cfont minorcontent'>
 							<div class='col-md-8'>
 								<div class='row'>
